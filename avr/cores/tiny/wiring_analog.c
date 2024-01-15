@@ -361,7 +361,7 @@ void analogWrite(uint8_t pin, int val) {
       if (timer) {
         uint8_t bitmask = timer & 0xF0;
         if (timer & 0x08) {
-          _SWAP(bitmask);
+            timer >> 4;
         }
         timer &= 0x07;
         switch (timer) {
