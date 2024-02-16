@@ -34,6 +34,7 @@
 #if ((defined(UBRRH) || defined(UBRR0H) || defined(UBRR1H) || defined(LINBRRH)) && !(USE_SOFTWARE_SERIAL && (!defined(UBRR1H) || DISABLE_UART1)) && !DISABLE_UART && !(DISABLE_UART0 && (DISABLE_UART1 || !defined(UBRR1H ))))
 
   #include "HardwareSerial.h"
+extern   ring_buffer tx_buffer;
   //from here on out we rely on the normalized register names!
 
 
@@ -181,8 +182,13 @@
       if(!(LINENIR & _BV(LENTXOK))){
         //The buffer was previously empty, so enable TX Complete interrupt and load first byte.
         LINENIR = _BV(LENTXOK) | _BV(LENRXOK);
+        /*
         unsigned char c = _tx_buffer->buffer[_tx_buffer->tail];
         _tx_buffer->tail = (_tx_buffer->tail + 1) & (SERIAL_BUFFER_SIZE - 1);
+        */
+        unsigned char c = tx_buffer.buffer[tx_buffer.tail];
+        tx_buffer.tail = (tx_buffer.tail + 1) % SERIAL_BUFFER_SIZE;
+
         LINDAT = c;
       }
     #endif
