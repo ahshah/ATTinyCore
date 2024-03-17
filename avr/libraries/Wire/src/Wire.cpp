@@ -437,6 +437,10 @@
     return quantity - 1; // ignore slave address
   }
 
+char TwoWire::getError() {
+    return USI_TWI_Get_State_Info();
+}
+
   uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity,
                                uint8_t sendStop) {
     return requestFrom((uint8_t)address, (uint8_t)quantity, (uint32_t)0, (uint8_t)0, (uint8_t)sendStop);

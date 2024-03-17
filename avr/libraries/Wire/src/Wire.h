@@ -83,6 +83,7 @@
       void end();
       void setClock(uint32_t);
       void beginTransmission(uint8_t);
+      char getError();
       void beginTransmission(int);
       uint8_t endTransmission(void);
       uint8_t endTransmission(uint8_t);
@@ -136,6 +137,7 @@
       void end();
       void setClock(uint32_t);
       void beginTransmission(uint8_t);
+      char getError();
       void beginTransmission(int);
       uint8_t endTransmission(void);
       uint8_t endTransmission(uint8_t);
@@ -183,6 +185,7 @@
     void setClock(uint32_t);
     void beginTransmission(uint8_t);
     void beginTransmission(int);
+    char getError();
     uint8_t endTransmission(void);
     uint8_t endTransmission(uint8_t);
     uint8_t requestFrom(uint8_t, uint8_t);
